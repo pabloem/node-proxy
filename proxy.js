@@ -7,7 +7,7 @@ http.createServer(function(req, res) {
     var hostname = req.headers.host.split(":")[0];
     var pathname = url.parse(req.url).pathname;
 
-    console.log(pathname);
+    console.log(hostname + ' - '+pathname);
     switch(hostname)
     {
         case 'www.hanja.me':
@@ -18,6 +18,7 @@ http.createServer(function(req, res) {
             break;
         case 'chess.iampablo.me':
             proxy.web(req,res, {target: 'http://0.0.0.0:8080'});
+            break;
         default:
             proxy.web(req, res, {target: 'http://0.0.0.0:8081'});
     }
