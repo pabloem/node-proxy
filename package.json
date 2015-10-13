@@ -1,7 +1,7 @@
 {
   "name":"node-proxy",
   "dependencies": {
-    "http":"^4.0.0",
-    "http-proxy":
+    "http":"^0.0.0",
+    "http-proxy":"^1.0.0"
   }
 }
