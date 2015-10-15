@@ -1,7 +1,16 @@
 var http = require('http'),
     httpProxy = require('http-proxy'),
-    proxy = httpProxy.createProxyServer({}),
+    cluster = require('cluster'),
     url = require('url');
+
+if(cluster.isMaster) {
+    cluster.fork();
+    cluster.on('exit',function(worker) {
+        console.log("We lost worker: " +worker.id);
+        cluster.fork();
+    });
+} else {
+var proxy = httpProxy.createProxyServer({});
 
 http.createServer(function(req, res) {
     var hostname = req.headers.host.split(":")[0];
@@ -25,4 +34,4 @@ http.createServer(function(req, res) {
 }).listen(80, function() {
     console.log('proxy listening on port 80');
 });
-
+}
