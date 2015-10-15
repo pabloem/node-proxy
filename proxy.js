@@ -5,6 +5,7 @@ var http = require('http'),
 
 if(cluster.isMaster) {
     cluster.fork();
+    cluster.fork();
     cluster.on('exit',function(worker) {
         console.log("We lost worker: " +worker.id);
         cluster.fork();
